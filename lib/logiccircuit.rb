@@ -1,5 +1,5 @@
 require "logiccircuit/version"
 
-module Logiccircuit
+module LogicCircuit
   # Your code goes here...
 end
