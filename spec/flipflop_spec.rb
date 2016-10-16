@@ -34,60 +34,60 @@ module LogicCircuit
 
     describe JK do
       it "outputs 1 when j = 1 and k = 0" do
-        clock = Wire.new
+        clock = Clock.new
         j = Wire.new 1
         k = Wire.new
         f = JK.new j, k, clock
-        clock.input = 1
+        clock.tick
         expect(f.output.to_i).to eq(1)
       end
       it "outputs 0 when j = 0 and k = 1" do
-        clock = Wire.new
+        clock = Clock.new
         j = Wire.new
         k = Wire.new 1
         f = JK.new j, k, clock
-        clock.input = 1
+        clock.tick
         expect(f.output.to_i).to eq(0)
       end
       it "outputs 0 when j = 1 and k = 0 and then j = k = 1" do
-        clock = Wire.new
+        clock = Clock.new
         j = Wire.new 1
         k = Wire.new
         f = JK.new j, k, clock
-        clock.input = 1
+        clock.tick
         expect(f.output.to_i).to eq(1)
-        clock.input = 0
+        clock.tack
         k.input = 1
-        clock.input = 1
+        clock.tick
         expect(f.output.to_i).to eq(0)
       end
       it "outputs 1 when j = 0 and k = 1 and then j = k = 1" do
-        clock = Wire.new
+        clock = Clock.new
         j = Wire.new
         k = Wire.new 1
         f = JK.new j, k, clock
-        clock.input = 1
+        clock.tick
         expect(f.output.to_i).to eq(0)
-        clock.input = 0
+        clock.tack
         j.input = 1
-        clock.input = 1
+        clock.tick
         expect(f.output.to_i).to eq(1)
       end
     end
     
     describe T do
       it "outputs 1 when output was 0 and then clock = 1" do
-        clock = Wire.new
+        clock = Clock.new
         t = T.new clock
-        clock.input = 1
+        clock.tick
         expect(t.output.to_i).to eq(1)
       end
       it "outputs 0 when output was 1 and then clock = 1" do
-        clock = Wire.new
+        clock = Clock.new
         t = T.new clock
-        clock.input = 1
-        clock.input = 0
-        clock.input = 1
+        clock.tick
+        clock.tack
+        clock.tick
         expect(t.output.to_i).to eq(0)
       end
     end
