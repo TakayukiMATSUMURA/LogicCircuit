@@ -9,26 +9,25 @@ module LogicCircuit
       !(@inputs.all?(&:output))
     end
   end
-
+  
   class Not < Gate
     def initialize input
+      @implement = Nand.new input
       super
-    end
-    
-    def drive
-      (@gate ||= Nand.new @inputs[0]).drive
     end
   end
   
   class And < Gate
-    def drive
-      (@gate ||= Nand.new(Nand.new @inputs)).drive
+    def initialize *inputs
+      @implement = Nand.new(Nand.new *inputs)
+      super
     end
   end
   
   class Or < Gate
-    def drive
-      (@gate ||= Nand.new @inputs.map{|input| Nand.new input}).drive
+    def initialize *inputs
+      @implement = Nand.new *inputs.map{|input| Nand.new input}
+      super
     end
   end
 end

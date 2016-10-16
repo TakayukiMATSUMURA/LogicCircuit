@@ -20,6 +20,10 @@ module LogicCircuit
       input.add_observer self
     end
     
+    def drive
+      @implement.drive
+    end
+    
     def update
       output = drive
       if output != @output
