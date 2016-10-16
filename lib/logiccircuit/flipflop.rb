@@ -7,15 +7,9 @@ module LogicCircuit
     
     class RS < Base
       def initialize r, s
-        @r, @s = r, s
-        
-        @snand = Nand.new Not.new(@s)
-        rnand = Nand.new Not.new(@r), @snand
-        @snand << rnand
-        
+        @snand = Nand.new Not.new(s),
+                          Nand.new(Not.new(r), self)
         super
-        @output = drive
-        @inputs.each{|input| input.add_observer self}
       end
       
       def drive
