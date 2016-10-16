@@ -31,5 +31,48 @@ module LogicCircuit
         expect(f.output.to_i).to eq(0)
       end
     end
+
+    describe JK do
+      it "outputs 1 when j = 1 and k = 0" do
+        clock = Wire.new
+        j = Wire.new 1
+        k = Wire.new
+        f = JK.new j, k, clock
+        clock.input = 1
+        expect(f.output.to_i).to eq(1)
+      end
+      it "outputs 0 when j = 0 and k = 1" do
+        clock = Wire.new
+        j = Wire.new
+        k = Wire.new 1
+        f = JK.new j, k, clock
+        clock.input = 1
+        expect(f.output.to_i).to eq(0)
+      end
+      it "outputs 0 when j = 1 and k = 0 and then j = k = 1" do
+        clock = Wire.new
+        j = Wire.new 1
+        k = Wire.new
+        f = JK.new j, k, clock
+        clock.input = 1
+        expect(f.output.to_i).to eq(1)
+        clock.input = 0
+        k.input = 1
+        clock.input = 1
+        expect(f.output.to_i).to eq(0)
+      end
+      it "outputs 1 when j = 0 and k = 1 and then j = k = 1" do
+        clock = Wire.new
+        j = Wire.new
+        k = Wire.new 1
+        f = JK.new j, k, clock
+        clock.input = 1
+        expect(f.output.to_i).to eq(0)
+        clock.input = 0
+        j.input = 1
+        clock.input = 1
+        expect(f.output.to_i).to eq(1)
+      end
+    end
   end
 end  
