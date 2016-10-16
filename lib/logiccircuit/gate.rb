@@ -35,4 +35,14 @@ module LogicCircuit
       !(@inputs.all?(&:output))
     end
   end
+
+  class Not < Gate
+    def initialize input
+      super
+    end
+    
+    def drive
+      (@gate ||= Nand.new @inputs[0]).drive
+    end
+  end
 end

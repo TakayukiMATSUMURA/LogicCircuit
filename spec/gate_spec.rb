@@ -25,4 +25,19 @@ module LogicCircuit
       expect(nand.output.to_i).to eq(1)
     end
   end
+  
+  describe Not do
+    it "outputs 1 if input is 0" do
+      a = Wire.new
+      n = Not.new a
+      expect(n.output.to_i).to eq(1)
+    end
+  end
+  describe Not do
+    it "outputs 0 if input is 1" do
+      a = Wire.new 1
+      n = Not.new a
+      expect(n.output.to_i).to eq(0)
+    end
+  end
 end
