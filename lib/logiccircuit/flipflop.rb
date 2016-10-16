@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 module LogicCircuit
   module FlipFlop
-    class Base < LogicCircuit::Gate
+    class Base < Element
     end
     
     class RS < Base
