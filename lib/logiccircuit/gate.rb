@@ -14,6 +14,12 @@ module LogicCircuit
       @inputs.each{|input| input.add_observer self}
     end
     
+    def << input
+      @inputs << input
+      @output = drive
+      input.add_observer self
+    end
+    
     def to_s
       (@name ||= self.class.name.split("::").last).downcase +
         " in:#{@inputs.map{|input| input.output.to_i}.join}" +
