@@ -1,0 +1,28 @@
+require "spec_helper"
+using LogicCircuit::Boolean
+
+module LogicCircuit
+  describe Nand do
+    it "outputs 0 if all inputs are 1" do
+      a = Wire.new
+      b = Wire.new
+      
+      nand = Nand.new a, b
+      a.input = 1
+      b.input = 1
+      expect(nand.output.to_i).to eq(0)
+    end
+    it "outputs 1 if any input is 0" do
+      a = Wire.new
+      b = Wire.new
+      
+      nand = Nand.new a, b
+      expect(nand.output.to_i).to eq(1)
+      a.input = 1
+      expect(nand.output.to_i).to eq(1)
+      a.input = 0
+      b.input = 1
+      expect(nand.output.to_i).to eq(1)
+    end
+  end
+end
