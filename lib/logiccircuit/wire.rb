@@ -2,6 +2,8 @@
 #-*- coding: utf-8 -*-
 require 'observer'
 
+using LogicCircuit::Boolean
+
 module LogicCircuit
   class Wire
     include Observable
@@ -9,12 +11,12 @@ module LogicCircuit
     attr_reader :output
     
     def initialize input = false
-      @output = input
+      @output = input.to_b
     end
     
     def input= input
-      return if @output == input
-      @output = input
+      return if @output == input.to_b
+      @output = input.to_b
       changed
       notify_observers
     end
