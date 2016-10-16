@@ -74,5 +74,22 @@ module LogicCircuit
         expect(f.output.to_i).to eq(1)
       end
     end
+    
+    describe T do
+      it "outputs 1 when output was 0 and then clock = 1" do
+        clock = Wire.new
+        t = T.new clock
+        clock.input = 1
+        expect(t.output.to_i).to eq(1)
+      end
+      it "outputs 0 when output was 1 and then clock = 1" do
+        clock = Wire.new
+        t = T.new clock
+        clock.input = 1
+        clock.input = 0
+        clock.input = 1
+        expect(t.output.to_i).to eq(0)
+      end
+    end
   end
 end  

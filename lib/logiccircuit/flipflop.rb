@@ -28,5 +28,11 @@ module LogicCircuit
         @jnand.drive
       end
     end
+
+    class T < JK
+      def initialize clock
+        super Wire.new(1), Wire.new(1), clock
+      end
+    end
   end
 end
