@@ -51,4 +51,10 @@ module LogicCircuit
       (@gate ||= Nand.new(Nand.new @inputs)).drive
     end
   end
+  
+  class Or < Gate
+    def drive
+      (@gate ||= Nand.new @inputs.map{|input| Nand.new input}).drive
+    end
+  end
 end
