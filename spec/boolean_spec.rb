@@ -1,5 +1,4 @@
 require "spec_helper"
-require 'logiccircuit/boolean'
 using LogicCircuit::Boolean
 
 module LogicCircuit

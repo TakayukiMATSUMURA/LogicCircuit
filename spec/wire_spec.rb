@@ -1,5 +1,4 @@
 require "spec_helper"
-require 'logiccircuit/wire'
 
 module LogicCircuit
   describe Wire do
