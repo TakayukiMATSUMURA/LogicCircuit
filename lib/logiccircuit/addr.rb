@@ -17,4 +17,17 @@ module LogicCircuit
       super
     end
   end
+  
+  class FullAddr < Addr
+    def initialize a, b, x
+      addr = HalfAddr.new a, b
+      @addr = HalfAddr.new x, addr.s
+      @or = Or.new addr.c, @addr.c
+      @implement = [@or, @addr]
+      super
+    end
+    
+    def c; @or; end
+    def s; @addr.s; end
+  end
 end
