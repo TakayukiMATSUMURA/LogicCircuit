@@ -5,8 +5,12 @@ module LogicCircuit
   end
   
   class Nand < Gate
-    def drive
-      [!(@inputs.all?(&:output))].flatten
+    def initialize *inputs
+      @implement = Object.new
+      @implement.singleton_class.__send__ :define_method,
+                                          :drive,
+                                          lambda{!(inputs.all?(&:output))}
+      super
     end
   end
   
