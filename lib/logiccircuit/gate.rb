@@ -6,7 +6,7 @@ module LogicCircuit
   
   class Nand < Gate
     def drive
-      !(@inputs.all?(&:output))
+      [!(@inputs.all?(&:output))].flatten
     end
   end
   

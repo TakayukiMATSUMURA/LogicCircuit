@@ -6,28 +6,30 @@ module LogicCircuit
   class Element
     include Observable
     
-    attr_reader :output
-    
     def initialize *inputs
       @inputs = [*inputs].flatten
-      @output = drive
+      @outputs = drive
       @inputs.each{|input| input.add_observer self}
+    end
+    
+    def output
+      (@outputs ||= [])[0]
     end
     
     def << input
       @inputs << input
-      @output = drive
+      @outputs = drive
       input.add_observer self
     end
     
     def drive
-      @implement.drive
+      [@implement.drive].flatten
     end
     
     def update
-      output = drive
-      if output != @output
-        @output = output
+      outputs = drive
+      if outputs.zip(@outputs).any?{|a, b| a != b}
+        @outputs = outputs
         changed
         notify_observers
       end
