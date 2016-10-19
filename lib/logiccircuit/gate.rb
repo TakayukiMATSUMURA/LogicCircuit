@@ -36,7 +36,7 @@ module LogicCircuit
   
   class Xor < Gate
     def impl
-      @impl ||= @inputs.inject{|xor, input| result = Xor2inputs.new xor, input}
+      @impl ||= @inputs.inject{|xor, input| Xor2inputs.new xor, input}
     end
     
     private
