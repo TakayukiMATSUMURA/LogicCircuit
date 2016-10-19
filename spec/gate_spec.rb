@@ -95,4 +95,39 @@ module LogicCircuit
       expect(e.output).to eq(0)
     end
   end
+  
+  describe Xor do
+    it "outputs 0 if even inputs are 1" do
+      a = Wire.new
+      b = Wire.new
+      c = Wire.new
+      e = Xor.new a, b, c
+      expect(e.output).to eq(0)
+      a.input = 1
+      b.input = 1
+      expect(e.output).to eq(0)
+      a.input = 0
+      c.input = 1
+      expect(e.output).to eq(0)
+      b.input = 0
+      a.input = 1
+      expect(e.output).to eq(0)
+    end
+    it "outputs 0 if odd inputs are 1" do
+      a = Wire.new 1
+      b = Wire.new
+      c = Wire.new
+      e = Xor.new a, b, c
+      expect(e.output).to eq(1)
+      a.input = 0
+      b.input = 1
+      expect(e.output).to eq(1)
+      b.input = 0
+      c.input = 1
+      expect(e.output).to eq(1)
+      a.input = 1
+      b.input = 1
+      expect(e.output).to eq(1)
+    end
+  end
 end

@@ -33,4 +33,20 @@ module LogicCircuit
       @impl ||= Not.new Or.new(@inputs)
     end
   end
+  
+  class Xor < Gate
+    def impl
+      @impl ||= @inputs.inject{|xor, input| result = Xor2inputs.new xor, input}
+    end
+    
+    private
+    class Xor2inputs < Gate
+      attr_reader :impl
+      
+      def initialize a, b
+        @impl = And.new Nand.new(a, b), Or.new(a, b)
+        super
+      end
+    end
+  end
 end

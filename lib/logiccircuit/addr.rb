@@ -9,7 +9,7 @@ module LogicCircuit
   class HalfAddr < Addr
     def initialize a, b
       @c = And.new a, b
-      @s = And.new Or.new(a, b), Not.new(c)
+      @s = Xor.new a, b
       super
     end
     
