@@ -11,7 +11,7 @@ module LogicCircuit
     end
     
     def impl
-      @impl ||= Nand.new(Not.new(@s), Nand.new(Not.new(@r), self))
+      @impl ||= Nand.new Not.new(@s), Nand.new(Not.new @r, self)
     end
   end
   
@@ -22,8 +22,8 @@ module LogicCircuit
     end
     
     def impl
-      @impl ||= Nand.new(Nand.new(@j, @clock, Not.new(self)),
-                         Nand.new(self, Nand.new(@k, @clock, self)))
+      @impl ||= Nand.new Nand.new(@j, @clock, Not.new(self)),
+                         Nand.new(self, Nand.new(@k, @clock, self))
     end
   end
   
