@@ -11,8 +11,13 @@ module LogicCircuit
   end
   
   class Not < Gate
+    def initialize a
+      @a = a
+      super
+    end
+    
     def impl
-      @impl ||= Nand.new @inputs[0]
+      @impl ||= Nand.new @a
     end
   end
   
