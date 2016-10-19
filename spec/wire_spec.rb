@@ -2,24 +2,24 @@ require "spec_helper"
 
 module LogicCircuit
   describe Wire do
-    it "constructed with no argument has false output" do
+    it "outputs 0 when constructed with no argument" do
       w = Wire.new
-      expect(w.output).to eq(false)
+      expect(w.output).to eq(0)
     end
-    it "constructed with true has true output" do
-      w = Wire.new true
-      expect(w.output).to eq(true)
+    it "outputs 0 when constructed with 1" do
+      w = Wire.new 1
+      expect(w.output).to eq(1)
     end
     
-    it "constructed with true and assigned false has false output" do
-      w = Wire.new true
-      w.input = false
-      expect(w.output).to eq(false)
+    it "outputs 0 when constructed with 1 and assigned 0" do
+      w = Wire.new 1
+      w.input = 0
+      expect(w.output).to eq(0)
     end
-    it "constructed with false and assigned true has true output" do
-      w = Wire.new false
-      w.input = true
-      expect(w.output).to eq(true)
+    it "outputs 1 when constructed with 0 and assigned 1" do
+      w = Wire.new 0
+      w.input = 1
+      expect(w.output).to eq(1)
     end
   end
 end

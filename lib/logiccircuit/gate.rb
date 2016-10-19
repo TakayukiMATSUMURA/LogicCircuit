@@ -6,7 +6,7 @@ module LogicCircuit
   
   class Nand < Gate
     def drive
-      [!(@inputs.all?(&:output))]
+      [!(@inputs.all?{|input| input.output == 1}) ? 1 : 0]
     end
   end
   

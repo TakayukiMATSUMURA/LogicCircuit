@@ -2,21 +2,19 @@
 #-*- coding: utf-8 -*-
 require 'observer'
 
-using LogicCircuit::Boolean
-
 module LogicCircuit
   class Wire
     include Observable
     
     attr_reader :output
     
-    def initialize input = false
-      @output = input.to_b
+    def initialize input = 0
+      @output = input
     end
     
     def input= input
-      return if @output == input.to_b
-      @output = input.to_b
+      return if @output == input
+      @output = input
       changed
       notify_observers
     end

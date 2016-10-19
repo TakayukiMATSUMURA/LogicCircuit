@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 #-*- coding: utf-8 -*-
-using LogicCircuit::Boolean
-
 module LogicCircuit
   class Addr < Element
     undef output

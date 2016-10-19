@@ -3,7 +3,7 @@
 module LogicCircuit
   class Clock < Wire
     def initialize
-      @output = false
+      @output = 0
     end
     
     def tick; self.input = 1; end
