@@ -8,7 +8,6 @@ module LogicCircuit
     
     def initialize *inputs
       @inputs = [*inputs].flatten
-      @implement = [@implement].flatten
       @outputs = drive
       @inputs.each{|input| input.add_observer self}
     end
@@ -18,7 +17,7 @@ module LogicCircuit
     end
     
     def drive
-      @implement.flat_map(&:drive)
+      [impl].flatten.flat_map(&:drive)
     end
     
     def update

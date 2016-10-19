@@ -5,33 +5,26 @@ module LogicCircuit
   end
   
   class Nand < Gate
-    def initialize *inputs
-      @implement = Object.new
-      @implement.singleton_class.__send__ :define_method,
-                                          :drive,
-                                          lambda{!(inputs.all?(&:output))}
-      super
+    def drive
+      [!(@inputs.all?(&:output))]
     end
   end
   
   class Not < Gate
-    def initialize input
-      @implement = Nand.new input
-      super
+    def impl
+      @impl ||= Nand.new(@inputs[0])
     end
   end
   
   class And < Gate
-    def initialize *inputs
-      @implement = Nand.new(Nand.new *inputs)
-      super
+    def impl
+      @impl ||= Nand.new(Nand.new @inputs)
     end
   end
   
   class Or < Gate
-    def initialize *inputs
-      @implement = Nand.new *inputs.map{|input| Nand.new input}
-      super
+    def impl
+      @impl ||= Nand.new(@inputs.map{|input| Nand.new input})
     end
   end
 end

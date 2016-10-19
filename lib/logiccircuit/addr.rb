@@ -5,16 +5,18 @@ using LogicCircuit::Boolean
 module LogicCircuit
   class Addr < Element
     undef output
+    attr_reader :c, :s
   end
   
   class HalfAddr < Addr
-    attr_reader :c, :s
-    
     def initialize a, b
-      @c = And.new(a, b)
-      @s = And.new Or.new(a, b), Not.new(@c)
-      @implement = [@s, @c]
+      @c = And.new a, b
+      @s = And.new Or.new(a, b), Not.new(c)
       super
+    end
+    
+    def impl
+      [@c, @s]
     end
   end
   
@@ -22,12 +24,13 @@ module LogicCircuit
     def initialize a, b, x
       addr = HalfAddr.new a, b
       @addr = HalfAddr.new x, addr.s
-      @or = Or.new addr.c, @addr.c
-      @implement = [@or, @addr]
+      @s = @addr.s
+      @c = Or.new addr.c, @addr.c
       super
     end
     
-    def c; @or; end
-    def s; @addr.s; end
+    def impl
+      [@c, @addr]
+    end
   end
 end
