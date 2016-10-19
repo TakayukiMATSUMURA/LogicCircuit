@@ -77,4 +77,22 @@ module LogicCircuit
       expect(o.output).to eq(1)
     end
   end
+  
+  describe Nor do
+    it "outputs 1 if all inputs are 0" do
+      a = Wire.new
+      b = Wire.new
+      e = Nor.new a, b
+      expect(e.output).to eq(1)
+    end
+    it "outputs 0 if any input is 1" do
+      a = Wire.new 1
+      b = Wire.new
+      e = Nor.new a, b
+      expect(e.output).to eq(0)
+      a.input = 0
+      b.input = 1
+      expect(e.output).to eq(0)
+    end
+  end
 end

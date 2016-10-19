@@ -27,4 +27,10 @@ module LogicCircuit
       @impl ||= Nand.new @inputs.map{|input| Nand.new input}
     end
   end
+  
+  class Nor < Gate
+    def impl
+      @impl ||= Not.new Or.new(@inputs)
+    end
+  end
 end
