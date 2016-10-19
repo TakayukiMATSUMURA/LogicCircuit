@@ -41,11 +41,13 @@ module LogicCircuit
     
     private
     class Xor2inputs < Gate
-      attr_reader :impl
-      
       def initialize a, b
-        @impl = And.new Nand.new(a, b), Or.new(a, b)
+        @a, @b = a, b
         super
+      end
+      
+      def impl
+        @impl ||= And.new Nand.new(@a, @b), Or.new(@a, @b)
       end
     end
   end
