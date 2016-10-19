@@ -21,12 +21,12 @@ module LogicCircuit
       f = RS.new r, s
       expect(f.output).to eq(0)
     end
-    it "outputs 1 when s = 0 and r = 1 and then r = 0" do
+    it "outputs 0 when s = 0 and r = 1 and then r = 0" do
       r = Wire.new 1
       s = Wire.new
       f = RS.new r, s
       r.input = 0
-      expect(f.output).to eq(1)
+      expect(f.output).to eq(0)
     end
   end
   

@@ -7,11 +7,12 @@ module LogicCircuit
   class RS < FlipFlop
     def initialize r, s
       @r, @s = r, s
+      @outputs = [1]
       super
     end
     
     def impl
-      @impl ||= Nand.new Not.new(@s), Nand.new(Not.new @r, self)
+      @impl ||= Nand.new Not.new(@s), Nand.new(Not.new(@r), self)
     end
   end
   
