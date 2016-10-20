@@ -12,18 +12,14 @@ module LogicCircuit
       @inputs.each{|input| input.add_observer self}
     end
     
-    def output
-      (@outputs ||= [])[0]
-    end
-    
     def drive
-      [impl].flatten.flat_map(&:drive)
+      outputs.map(&:output)
     end
     
     def update
-      outputs = drive
-      if outputs.zip(@outputs).any?{|a, b| a != b}
-        @outputs = outputs
+      new_outputs = drive
+      if new_outputs.zip(@outputs).any?{|a, b| a != b}
+        @outputs = new_outputs
         changed
         notify_observers
       end

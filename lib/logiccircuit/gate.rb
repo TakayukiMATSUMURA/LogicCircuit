@@ -2,6 +2,9 @@
 #-*- coding: utf-8 -*-
 module LogicCircuit
   class Gate < Element
+    def output
+      @outputs[0]
+    end
   end
   
   class Nand < Gate
@@ -11,48 +14,39 @@ module LogicCircuit
   end
   
   class Not < Gate
-    def initialize a
-      @a = a
-      super
-    end
-    
-    def impl
-      @impl ||= Nand.new @a
+    def outputs
+      [@not ||= Nand.new(@inputs[0])]
     end
   end
   
   class And < Gate
-    def impl
-      @impl ||= Nand.new Nand.new(@inputs)
+    def outputs
+      [@and ||= Nand.new(Nand.new(@inputs))]
     end
   end
   
   class Or < Gate
-    def impl
-      @impl ||= Nand.new @inputs.map{|input| Nand.new input}
+    def outputs
+      [@or ||= Nand.new(@inputs.map{|input| Nand.new input})]
     end
   end
   
   class Nor < Gate
-    def impl
-      @impl ||= Not.new Or.new(@inputs)
+    def outputs
+      [@nor ||= Not.new(Or.new(@inputs))]
     end
   end
   
   class Xor < Gate
-    def impl
-      @impl ||= @inputs.inject{|xor, input| Xor2inputs.new xor, input}
+    def outputs
+      [@xor ||= @inputs.inject{|xor, input| Xor2inputs.new xor, input}]
     end
     
     private
     class Xor2inputs < Gate
-      def initialize a, b
-        @a, @b = a, b
-        super
-      end
-      
-      def impl
-        @impl ||= And.new Nand.new(@a, @b), Or.new(@a, @b)
+      def outputs
+        [@xor ||= And.new(Nand.new(@inputs[0], @inputs[1]),
+                          Or.new(@inputs[0], @inputs[1]))]
       end
     end
   end

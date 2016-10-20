@@ -2,6 +2,9 @@
 #-*- coding: utf-8 -*-
 module LogicCircuit
   class FlipFlop < Element
+    def output
+      (@outputs ||= [])[0]
+    end
   end
   
   class RS < FlipFlop
@@ -11,8 +14,8 @@ module LogicCircuit
       super
     end
     
-    def impl
-      @impl ||= Nand.new Not.new(@s), Nand.new(Not.new(@r), self)
+    def outputs
+      [@nand ||= Nand.new(Not.new(@s), Nand.new(Not.new(@r), self))]
     end
   end
   
@@ -22,9 +25,9 @@ module LogicCircuit
       super
     end
     
-    def impl
-      @impl ||= Nand.new Nand.new(@j, @clock, Not.new(self)),
-                         Nand.new(self, Nand.new(@k, @clock, self))
+    def outputs
+      [@nand ||= Nand.new(Nand.new(@j, @clock, Not.new(self)),
+                          Nand.new(self, Nand.new(@k, @clock, self)))]
     end
   end
   

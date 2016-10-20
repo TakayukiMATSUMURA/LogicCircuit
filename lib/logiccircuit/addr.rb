@@ -2,7 +2,6 @@
 #-*- coding: utf-8 -*-
 module LogicCircuit
   class Addr < Element
-    undef output
     attr_reader :c, :s
   end
   
@@ -13,22 +12,22 @@ module LogicCircuit
       super
     end
     
-    def impl
+    def outputs
       [@c, @s]
     end
   end
   
   class FullAddr < Addr
     def initialize a, b, x
-      addr = HalfAddr.new a, b
-      @addr = HalfAddr.new x, addr.s
-      @s = @addr.s
-      @c = Or.new addr.c, @addr.c
+      addr0 = HalfAddr.new a, b
+      addr1 = HalfAddr.new x, addr0.s
+      @s = addr1.s
+      @c = Or.new addr0.c, addr1.c
       super
     end
     
-    def impl
-      [@c, @addr]
+    def outputs
+      [@c, @s]
     end
   end
 end
