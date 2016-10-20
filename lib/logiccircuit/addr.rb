@@ -6,14 +6,9 @@ module LogicCircuit
   end
   
   class HalfAddr < Addr
-    def initialize a, b
-      @c = And.new a, b
-      @s = Xor.new a, b
-      super
-    end
-    
     def outputs
-      [@c, @s]
+      [@c ||= And.new(@inputs[0], @inputs[1]),
+       @s ||= Xor.new(@inputs[0], @inputs[1])]
     end
   end
   
