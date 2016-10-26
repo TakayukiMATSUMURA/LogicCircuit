@@ -28,7 +28,7 @@ module LogicCircuit
     def to_s
       (@name ||= self.class.name.split("::").last).downcase +
         " in:#{@inputs.map{|input| input.output.to_i}.join}" +
-        " out:#{@output.to_i} "
+        " out:#{output.to_i} "
     end
   end
 end
