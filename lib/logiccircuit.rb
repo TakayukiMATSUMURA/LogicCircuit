@@ -4,7 +4,7 @@ require "logiccircuit/wire"
 require "logiccircuit/clock"
 require "logiccircuit/gate"
 require "logiccircuit/flipflop"
-require "logiccircuit/addr"
+require "logiccircuit/adder"
 
 module LogicCircuit
   # Your code goes here...

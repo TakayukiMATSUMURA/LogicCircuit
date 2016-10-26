@@ -1,21 +1,21 @@
 #!/usr/bin/env ruby
 #-*- coding: utf-8 -*-
 module LogicCircuit
-  class Addr < Element
+  class Adder < Element
     attr_reader :c, :s
   end
   
-  class HalfAddr < Addr
+  class HalfAdder < Adder
     def outputs
       [@c ||= And.new(@inputs[0], @inputs[1]),
        @s ||= Xor.new(@inputs[0], @inputs[1])]
     end
   end
   
-  class FullAddr < Addr
+  class FullAdder < Adder
     def initialize a, b, x
-      addr0 = HalfAddr.new a, b
-      addr1 = HalfAddr.new x, addr0.s
+      addr0 = HalfAdder.new a, b
+      addr1 = HalfAdder.new x, addr0.s
       @s = addr1.s
       @c = Or.new addr0.c, addr1.c
       super
