@@ -6,5 +6,4 @@ require "logiccircuit/gate"
 require "logiccircuit/flipflop"
 require "logiccircuit/adder"
 
-module LogicCircuit
-end
+include LogicCircuit
