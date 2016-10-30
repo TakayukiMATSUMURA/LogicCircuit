@@ -1,3 +1,3 @@
-module Logiccircuit
-  VERSION = "0.1.0"
+module LogicCircuit
+  VERSION = "1.0.0"
 end
