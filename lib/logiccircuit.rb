@@ -7,5 +7,4 @@ require "logiccircuit/flipflop"
 require "logiccircuit/adder"
 
 module LogicCircuit
-  # Your code goes here...
 end
